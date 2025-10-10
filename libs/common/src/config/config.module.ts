@@ -5,8 +5,9 @@ import Joi from 'joi';
 @Module({
   imports: [
     NestConfigModule.forRoot({
+      isGlobal: true,
       validationSchema: Joi.object({
-        MONGODB_UR: Joi.string().required(),
+        MONGODB_URI: Joi.string().required(),
       }),
     }),
   ],
