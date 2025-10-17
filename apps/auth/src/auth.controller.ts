@@ -1,7 +1,9 @@
+import { CurrentUser } from '@app/common';
 import { Controller, Post, Res, UseGuards } from '@nestjs/common';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import type { Response } from 'express';
 import { AuthService } from './auth.service';
-import { CurrentUser } from './current-user.decorator';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserDocument } from './users/models/users.schema';
 
@@ -17,5 +19,13 @@ export class AuthController {
   ) {
     await this.authService.login(user, response);
     response.send(user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @MessagePattern('authenticate')
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async authenticate(@Payload() data: any) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+    return data?.user;
   }
 }
