@@ -1,16 +1,30 @@
-import { IsCreditCard, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsCreditCard,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CardDto {
   @IsString()
   @IsNotEmpty()
-  cvc: string;
+  @IsOptional()
+  cvc?: string;
 
   @IsNumber()
-  exp_month: number;
+  @IsOptional()
+  exp_month?: number;
 
   @IsNumber()
-  exp_year: number;
+  @IsOptional()
+  exp_year?: number;
 
   @IsCreditCard()
-  number: string;
+  @IsOptional()
+  number?: string;
+
+  @IsString()
+  @IsOptional()
+  token?: string;
 }
