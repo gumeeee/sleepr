@@ -1,0 +1,68 @@
+steps:
+  # Reservations Service
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/reservations/production",
+        "apps/reservations/Dockerfile",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/reservations/production",
+      ]
+
+  # Auth Service
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/auth/production",
+        "apps/auth/Dockerfile",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/auth/production",
+      ]
+
+  # Notifications Service
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/notifications/production",
+        "apps/notifications/Dockerfile",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/notifications/production",
+      ]
+
+  # Payments Service
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/payments/production",
+        "apps/payments/Dockerfile",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-east4-docker.pkg.dev/solar-program-461222-k4/payments/production",
+      ]
