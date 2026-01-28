@@ -1,4 +1,5 @@
 # compiled output
+# node_modules is ignored by default in most environments
 /dist
 **/node_modules
 /build
