@@ -1,3 +1,7 @@
+# Configure Cloud Logging for service account builds
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 steps:
   # Reservations Service
   - name: "gcr.io/cloud-builders/docker"
@@ -6,6 +10,7 @@ steps:
         "build",
         "-t",
         "us-east4-docker.pkg.dev/solar-program-461222-k4/reservations/production",
+        "-f",
         "apps/reservations/Dockerfile",
         ".",
       ]
@@ -23,6 +28,7 @@ steps:
         "build",
         "-t",
         "us-east4-docker.pkg.dev/solar-program-461222-k4/auth/production",
+        "-f",
         "apps/auth/Dockerfile",
         ".",
       ]
@@ -40,6 +46,7 @@ steps:
         "build",
         "-t",
         "us-east4-docker.pkg.dev/solar-program-461222-k4/notifications/production",
+        "-f",
         "apps/notifications/Dockerfile",
         ".",
       ]
@@ -57,6 +64,7 @@ steps:
         "build",
         "-t",
         "us-east4-docker.pkg.dev/solar-program-461222-k4/payments/production",
+        "-f",
         "apps/payments/Dockerfile",
         ".",
       ]
