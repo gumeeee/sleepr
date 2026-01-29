@@ -1,4 +1,4 @@
-import { DatabaseModule, LoggerModule } from '@app/common';
+import { DatabaseModule, HealthModule, LoggerModule } from '@app/common';
 import { Module } from '@nestjs/common';
 import {
   ReservationDocument,
@@ -54,6 +54,7 @@ import { AUTH_SERVICE, PAYMENTS_SERVICE } from '@app/common/constants/services';
         inject: [ConfigService],
       },
     ]),
+    HealthModule,
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],
