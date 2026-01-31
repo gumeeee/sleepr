@@ -15,7 +15,7 @@ spec:
         app: payments
     spec:
       containers:
-        - image: us-east4-docker.pkg.dev/solar-program-461222-k4/payments/production
+        - image: 696605744003.dkr.ecr.us-east-1.amazonaws.com/payments:latest
           name: payments
           env:
             - name: PORT
