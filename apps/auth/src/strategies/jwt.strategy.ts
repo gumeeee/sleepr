@@ -21,7 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           request?.Authentication ||
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          request?.headers.Authentication,
+          request?.headers?.Authentication,
       ]),
       secretOrKey: configService.get<string>('JWT_SECRET')!,
     });

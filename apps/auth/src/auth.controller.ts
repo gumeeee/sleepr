@@ -1,13 +1,18 @@
-import { CurrentUser, UserDocument } from '@app/common';
+import {
+  AuthServiceController,
+  AuthServiceControllerMethods,
+  CurrentUser,
+  UserDocument,
+} from '@app/common';
 import { Controller, Post, Res, UseGuards } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
 import type { Response } from 'express';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Controller('auth')
-export class AuthController {
+@AuthServiceControllerMethods()
+export class AuthController implements AuthServiceController {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
@@ -21,10 +26,14 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @MessagePattern('authenticate')
   // eslint-disable-next-line @typescript-eslint/require-await
-  async authenticate(@Payload() data: any) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
-    return data?.user;
+  async authenticate(data: any) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ...data.user,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      id: data.user._id,
+    };
   }
 }
